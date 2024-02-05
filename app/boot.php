@@ -5,6 +5,7 @@ error_reporting(E_ALL^E_NOTICE);
 
 require_once "config.php";
 require_once "system/App.php";
+require_once "system/Database.php";
 require_once "route.php";
 
 

@@ -1,1 +1,7 @@
-<p>Deneme Controller sayfası</p>
+<?php
+class denemeController{
+         public function index(){
+                  echo "controller method'a gelindi";
+         }
+}
+?>

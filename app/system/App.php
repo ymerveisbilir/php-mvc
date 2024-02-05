@@ -17,7 +17,6 @@ class App
                   $this->home = $config['home'];
   
                   $this->startRoute();
-          
 
          }
 
@@ -47,10 +46,14 @@ class App
 
                            $methodCheck = $this->nowMethod == $method;
 
-                           $pathCheck = preg_match(pattern: "@^$link$@", subject: $this->nowPath, flags: PREG_UNMATCHED_AS_NULL, matches: $matches);
+                           $pathCheck = preg_match(pattern: "@^$link$@", subject: $this->nowPath, flags: PREG_UNMATCHED_AS_NULL, matches: $params);
 
-                           //print_r($matches); gelen link ile route'daki link eşleşiyorsa 0 değerini yazdırır.
+                           //print_r($params); gelen link ile route'daki link eşleşiyorsa 0 değerini yazdırır.
+                     
 
+                           $modul="";
+                           $controller="";
+                           $method="";
                            if($methodCheck && $pathCheck){
                                     $url = explode("/",$path);
                                     array_shift($url);
@@ -59,33 +62,46 @@ class App
 
                                    if($this->nowPath == "/proje/"){//anasayfa ise 
                                     $modul = $this->home['modul'];
-                                    $controller = $this->home['modul']."Controller.php";
+                                    $controller = $this->home['modul']."Controller";
                                     $method = $this->home['method'];
 
                                     //print_r($this->$home);
                                    }else{
                                     $modul = $activeModul;
-                                    $controller = $activeModul."Controller.php";
+                                    $controller = $activeModul."Controller";
                                     $method = $activeMethod;
 
                                     //print_r($method);
                                    }
                            }
 
-                     
+                           if($modul != "" and $controller!=''){
+                              if(file_exists($file="../app/moduls/".$modul."/controller/".$controller.".php")){
+                                    require_once $file;
 
-                           if(file_exists($file="../app/moduls/".$modul."/controller/".$controller)){
-                                 require_once $file;
-                           }else{
-                                    echo "Method not found"."<br>";
+                               
+                                    if(class_exists($controller)){
+                                          $class=new $controller();
+                                          if(method_exists($class,$method)){ //Class içerisinde tanımlı method var mı ?
+                                                //print_r($params); url'den gelen parametreleri burada görebilirsin.
+                                              return call_user_func([$class,$method]);
+                                          }else{
+                                                echo "Method Not Found.";
+                                          }
+                                    }else{
+                                          echo "Class Not Found.";
+                                    }
+                              }else{
+                                       echo "Method Not Found"."<br>";
+                              }
                            }
-                           
-
-                      //Sorun : Örneğin http://localhost/proje/deneme url'indeyken route.php de bulunan diğer route'lar için method bulanmadı yazıyor.
-
+                         
 
 
                   }
+
+        
+
          }
 }
 
