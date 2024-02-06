@@ -8,5 +8,7 @@ require_once "system/App.php";
 require_once "system/Database.php";
 require_once "route.php";
 
+require_once "layout/mainLayout.php";
+
 
 ?>

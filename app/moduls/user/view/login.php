@@ -5,7 +5,7 @@
          <meta charset="UTF-8">
          <meta http-equiv="X-UA-Compatible" content="IE=edge">
          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <title>Register Page </title>
+         <title>Login Page </title>
 </head>
 <style>
          body {
@@ -43,7 +43,7 @@
          }
 
          button {
-                  background-color: #0000ff;
+                  background-color: #4caf50;
                   color: #fff;
                   padding: 10px 15px;
                   border: none;
@@ -60,13 +60,7 @@
 <body>
          <div class="form-container">
 
-                  <form action="/proje/registerPost" method="POST">
-
-                           <label>First Name :</label>
-                           <input type="text" id="fname" name="fname" required>
-
-                           <label>Last Name :</label>
-                           <input type="text" id="lname" name="lname" required>
+                  <form action="/proje/loginPost" method="POST">
 
                            <label >Email Address :</label>
                            <input type="email" id="email" name="email" required>
@@ -74,11 +68,10 @@
                            <label >Password:</label>
                            <input type="password" id="password" name="password" required>
 
-                           <label >Repeat Password:</label>
-                           <input type="password" id="rpassword" name="rpassword" required>
-
-                           <button type="submit">Register</button>
+                           <button type="submit">Login</button>
                   </form>
+
+
          </div>
 </body>
 
