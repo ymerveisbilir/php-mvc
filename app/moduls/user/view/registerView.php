@@ -1,3 +1,9 @@
+<?php
+foreach ($data['users'] as $user) {
+         echo $user['first_name'] . "<br>"; //Users tablosuna kayıtlı kullanıcı isimleri
+     }
+?>
+<!--
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,3 +89,4 @@
 </body>
 
 </html>
+-->

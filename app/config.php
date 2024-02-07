@@ -1,4 +1,7 @@
 <?php
+define('DIRECTORY','../app');
+
+
 global $config;
 
 $config=[

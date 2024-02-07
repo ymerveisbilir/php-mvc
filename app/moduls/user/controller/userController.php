@@ -1,20 +1,29 @@
 <?php
 
-class userController
-{
 
-         private $conn;
+class userController extends mainController
+{        
+         public $db;
 
-         public function __construct()
-         {
 
-                  $database = new Database();
-                  $this->conn = $database->getConnection();
+         public function __construct(){
+                  $mainModel = new mainModel();
+                  $this->db = $mainModel->db;
 
+      
+                  //deneme
+                  $users = new userModel();
+                  $data['users']=$users->users();
+
+                  $this->callLayout("menu","user","register",$data);
          }
+
          public function register()
          {
-                  include __DIR__ . "../../view/register.php";
+                 $data = ["Ad" => "Merve"]; //bu data model'den gelicek.
+                 return $this->callView("user","register",$data);
+
+                  
          }
 
          public function registerPost()
@@ -29,7 +38,10 @@ class userController
                   $email = $_POST['email'];
                   $password_repeat = $_POST['rpassword'];
 
-                  $count = $this->conn->prepare("SELECT COUNT(id) as quantity FROM users WHERE email = '$email'"); 
+         
+
+
+                  $count = $this->db->prepare("SELECT COUNT(id) as quantity FROM users WHERE email = '$email'"); 
                   $count->execute();
                   $user = $count->fetch(PDO::FETCH_ASSOC);
                   
@@ -51,7 +63,7 @@ class userController
                                     if(preg_match('/[a-z]/', $password) && preg_match('/[A-Z]/', $password)) {
                                         if(preg_match('/[0-9]/', $password)) {
                                             //echo "Şifre geçerlidir.";
-                                            $query = $this->conn->prepare("INSERT INTO users (first_name, last_name, password, email) VALUES ('$fname', '$lname','" . md5($password) . "', '$email')");
+                                            $query = $this->db->prepare("INSERT INTO users (first_name, last_name, password, email) VALUES ('$fname', '$lname','" . md5($password) . "', '$email')");
          
                                             $query->execute();
                  
@@ -79,7 +91,7 @@ class userController
                   $email = $_POST['email'];
                   $password = $_POST['password'];
 
-                  $count = $this->conn->prepare("SELECT COUNT(id) as quantity FROM users WHERE email = '$email' and password = '" . md5($password) . "'"); 
+                  $count = $this->db->prepare("SELECT COUNT(id) as quantity FROM users WHERE email = '$email' and password = '" . md5($password) . "'"); 
                   $count->execute();
                   $user = $count->fetch(PDO::FETCH_ASSOC);
 
