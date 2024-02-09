@@ -12,16 +12,23 @@ class userController extends mainController
 
       
                   //deneme
+                  /*
                   $users = new userModel();
                   $data['users']=$users->users();
 
                   $this->callLayout("menu","user","register",$data);
+                  */
          }
 
          public function register()
          {
-                 $data = ["Ad" => "Merve"]; //bu data model'den gelicek.
-                 return $this->callView("user","register",$data);
+
+
+                  $userModel = new userModel();
+                  $data['roles'] = $userModel->roles();
+                  $data['languages'] = $userModel->languages();
+                  $data['permissions'] = $userModel->permissions();
+                  $this->callView("user","register",$data);
 
                   
          }
@@ -38,12 +45,17 @@ class userController extends mainController
                   $email = $_POST['email'];
                   $password_repeat = $_POST['rpassword'];
 
-         
 
+                  $language_id = $_POST['languages'];
+                  $role_id = $_POST['roles'];
+                  $permission_id = json_encode($_POST['permission']);
 
-                  $count = $this->db->prepare("SELECT COUNT(id) as quantity FROM users WHERE email = '$email'"); 
-                  $count->execute();
-                  $user = $count->fetch(PDO::FETCH_ASSOC);
+                  
+                  
+
+                  $query = $this->db->prepare("SELECT COUNT(id) as quantity FROM users WHERE email = '$email'"); 
+                  $query->execute();
+                  $user = $query->fetch(PDO::FETCH_ASSOC);
                   
                   if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $fname) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $lname)) {
                            echo "Ad veya soyad özel karakter içeremez.";
@@ -64,8 +76,14 @@ class userController extends mainController
                                         if(preg_match('/[0-9]/', $password)) {
                                             //echo "Şifre geçerlidir.";
                                             $query = $this->db->prepare("INSERT INTO users (first_name, last_name, password, email) VALUES ('$fname', '$lname','" . md5($password) . "', '$email')");
-         
                                             $query->execute();
+
+                                            //kaydolunan kullanıcı id ile role_users tablosuna kayıt oluşturulmalı. (role_id , language_id ve permission_id)
+                                            $userResult = $this->db->query("SELECT * FROM users WHERE email = '$email'");
+                                            $user = $userResult->fetch(); 
+
+                                            $query2 = $this->db->prepare("INSERT INTO role_users (user_id, role_id, permission_id,language_id) VALUES ('$user[id]', '$role_id','$permission_id' ,'$language_id')");
+                                            $query2->execute();
                  
                                             echo "Üyelik Oluşturuldu.";
                                         } else {
@@ -81,7 +99,8 @@ class userController extends mainController
          }
 
          public function login(){
-                  include __DIR__ . "../../view/login.php";
+                  $data=[];
+                  $this->callView("user","login",$data);
          }
 
          public function loginPost(){
@@ -91,13 +110,29 @@ class userController extends mainController
                   $email = $_POST['email'];
                   $password = $_POST['password'];
 
-                  $count = $this->db->prepare("SELECT COUNT(id) as quantity FROM users WHERE email = '$email' and password = '" . md5($password) . "'"); 
-                  $count->execute();
-                  $user = $count->fetch(PDO::FETCH_ASSOC);
+                  $query = $this->db->prepare("SELECT COUNT(id) as quantity,first_name,id,last_name,email FROM users WHERE email = '$email' and password = '" . md5($password) . "'"); 
+                  $query->execute();
+                  $user = $query->fetch(PDO::FETCH_ASSOC);
+
 
                   if($user['quantity'] > 0){
-                           header('Location: http://localhost/proje/dashboard');
+                           session_start();
+                          
+                            $_SESSION['user_id'] = $user['id'];
+                            $_SESSION['fname'] = $user['first_name'];
+                            $_SESSION['lname'] = $user['last_name'];
+                            $_SESSION['email'] = $user['email'];
+                         
 
+/*
+                           echo $_SESSION['user_id']."<br>";
+                           echo $_SESSION['fname']."<br>";
+                           echo $_SESSION['lname']."<br>";
+                           echo $_SESSION['email']."<br>";
+                           die();
+*/
+
+                           header("Location: http://localhost/proje/dashboard");
                   }
 
 

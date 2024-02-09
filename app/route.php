@@ -13,5 +13,11 @@ App::postAction(link: '/proje/loginPost', path: '/user/loginPost', auth: false, 
 
 App::getAction(link: '/proje/dashboard', path: '/admin/dashboard', auth: false, area: null);
 
+App::getAction(link: '/proje/usersetting', path: '/admin/user', auth: false, area: null);
+
+App::getAction(link: '/proje/userupdate/([0-9a]+)', path: '/admin/userupdate/([0-9a]+)', auth: false, area: null);
+
+App::postAction(link: '/proje/userupdatePost', path: '/admin/userupdatePost', auth: false, area: null);
+
 
 ?>

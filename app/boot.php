@@ -11,8 +11,9 @@ require_once 'system/mainController.php';
 require_once 'system/mainView.php'; 
 require_once "route.php";
 
-require_once "layout/mainLayout.php";
-//require_once "layout/menu.php";
+require_once "layout/mainLayout.php"; //bootstrap
+require_once "layout/menuLayout.php";
+
 
 
 

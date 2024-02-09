@@ -181,34 +181,29 @@
 
                                                       <div class="card-body">
 
-                                                               <form action="/proje/registerPost" method="POST">
+                                                               <form action="/proje/userupdatePost" method="POST">
                                                                         <div class="form-group">
                                                                                  <label style="font-weight:bold">Kullanıcı Adı</label>
                                                                                  <input type="text" name="fname"
-                                                                                          class="form-control">
+                                                                                          class="form-control" value="<?=$data['first_name']?>">
                                                                         </div><br>
                                                                         <div class="form-group">
                                                                                  <label style="font-weight:bold">Kullanıcı Soyadı</label>
                                                                                  <input type="text" name="lname"
-                                                                                          class="form-control">
+                                                                                          class="form-control" value="<?=$data['last_name']?>">
                                                                         </div><br>
                                                                         <div class="form-group">
                                                                                  <label style="font-weight:bold">Kullanıcı E-mail</label>
                                                                                  <input type="email" name="email"
-                                                                                          class="form-control">
+                                                                                          class="form-control" value="<?=$data['email']?>">
                                                                         </div><br>
 
                                                                         <div class="form-group">
                                                                                  <label style="font-weight:bold">Kullanıcı Şifre</label>
                                                                                  <input type="password" name="password"
-                                                                                          class="form-control">
+                                                                                          class="form-control" value="">
                                                                         </div><br>
 
-                                                                        <div class="form-group">
-                                                                                 <label style="font-weight:bold">Kullanıcı Şifre Tekrar</label>
-                                                                                 <input type="password" name="rpassword"
-                                                                                          class="form-control">
-                                                                        </div><br>
                                                                         <div class="form-group">
                                                                                  <label style="font-weight:bold">Kullanıcı Rol Seçimi</label>
                                                                                  <select class="form-select"
@@ -216,7 +211,7 @@
                                                                                           aria-label="Disabled select example">
                                                                                           <?php
                                                                                           foreach ($data['roles'] as $role): ?>
-                                                                                                   <option
+                                                                                                   <option 
                                                                                                             value="<?= $role['id'] ?>">
                                                                                                             <?= $role['role_name'] ?>
                                                                                                    </option>
