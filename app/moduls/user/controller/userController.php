@@ -9,18 +9,9 @@ class userController extends mainController
          public function __construct(){
                   $mainModel = new mainModel();
                   $this->db = $mainModel->db;
-
-      
-                  //deneme
-                  /*
-                  $users = new userModel();
-                  $data['users']=$users->users();
-
-                  $this->callLayout("menu","user","register",$data);
-                  */
          }
 
-         public function register()
+         public function newuser()
          {
 
 
@@ -28,12 +19,12 @@ class userController extends mainController
                   $data['roles'] = $userModel->roles();
                   $data['languages'] = $userModel->languages();
                   $data['permissions'] = $userModel->permissions();
-                  $this->callView("user","register",$data);
+                  $this->callView("user","newuser",$data);
 
                   
          }
 
-         public function registerPost()
+         public function newuserPost()
          {
                   //$data = $_POST;
                   //print_r($data);

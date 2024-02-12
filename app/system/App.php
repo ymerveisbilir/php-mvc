@@ -20,14 +20,14 @@ class App
 
          }
 
-         public static function getAction($link, $path, $auth = false, $area = null)
+         public static function getAction($link, $path, $auth = false)
          {
-                  self::$routes[] = ['GET', $link, $path, $auth, $area];
+                  self::$routes[] = ['GET', $link, $path, $auth];
          }
 
-         public static function postAction($link, $path, $auth = false, $area = null)
+         public static function postAction($link, $path, $auth = false)
          {
-                  self::$routes[] = ['POST', $link, $path, $auth, $area];
+                  self::$routes[] = ['POST', $link, $path, $auth];
          }
 
          public function startRoute()
@@ -40,7 +40,7 @@ class App
                            //echo "<br>";
 
                            // $routes dizisinden gelen değerleri değişkenlere bölüyoruz.
-                           list($method, $link, $path, $auth, $area) = $routes;
+                           list($method, $link, $path, $auth) = $routes;
 
                            //  echo $method."<br>".$link."<br>".$path."<br>";
 

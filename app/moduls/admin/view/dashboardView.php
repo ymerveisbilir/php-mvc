@@ -1,8 +1,5 @@
 <?php
-
 session_start();
-
-//echo $_SESSION['fname']."<br>".$_SESSION['lname']."<br>".$_SESSION['user_id']."<br>".$_SESSION['email']; 
 ?>
 
 <!DOCTYPE html>

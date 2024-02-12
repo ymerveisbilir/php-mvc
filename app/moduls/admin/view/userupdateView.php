@@ -159,7 +159,7 @@
 
          <!-- Kenar çubuğu -->
          <div class="sidebar d-none d-md-block">
-                  <a href="dashboard">Dashboard</a>
+                  <a href="/proje/dashboard">Dashboard</a>
                   <a class="active" href="usersetting">Kullanıcı Ayarları</a>
          </div>
 
@@ -173,7 +173,7 @@
                                                                <div class="row">
                                                                         <div class="col-6"></div>
                                                                         <div class="col-6 d-flex justify-content-end"><a
-                                                                                          href="usersetting"
+                                                                                          href="/proje/usersetting"
                                                                                           class="btn btn-warning">Listele</a>
                                                                         </div>
                                                                </div>
@@ -181,7 +181,7 @@
 
                                                       <div class="card-body">
 
-                                                               <form action="/proje/userupdatePost" method="POST">
+                                                               <form action="/proje/userupdatePost/<?=$data['id']?>" method="POST">
                                                                         <div class="form-group">
                                                                                  <label style="font-weight:bold">Kullanıcı Adı</label>
                                                                                  <input type="text" name="fname"
@@ -201,55 +201,66 @@
                                                                         <div class="form-group">
                                                                                  <label style="font-weight:bold">Kullanıcı Şifre</label>
                                                                                  <input type="password" name="password"
-                                                                                          class="form-control" value="">
+                                                                                          class="form-control">
                                                                         </div><br>
+
+                                                                        <div class="alert alert-success" role="alert">
+                                                                        <p>Şifre en az 6 en fazla 10 karakterden oluşmalıdır.</p><br>
+                                                                        <p>Şifre büyük harf , küçük harf ve rakam içermelidir.</p>
+                                                                        </div>  
 
                                                                         <div class="form-group">
                                                                                  <label style="font-weight:bold">Kullanıcı Rol Seçimi</label>
-                                                                                 <select class="form-select"
-                                                                                          name="roles"
-                                                                                          aria-label="Disabled select example">
-                                                                                          <?php
-                                                                                          foreach ($data['roles'] as $role): ?>
-                                                                                                   <option 
-                                                                                                            value="<?= $role['id'] ?>">
-                                                                                                            <?= $role['role_name'] ?>
-                                                                                                   </option>
-                                                                                          <?php endforeach; ?>
+                                                                                 <select class="form-select" name="roles" aria-label="Disabled select example">
+                                                                                    <?php foreach ($data['roles'] as $role): ?>
+                                                                                        <?php if ($role['id'] == $data['role_id']): ?>
+                                                                                            <option value="<?= $role['id'] ?>" selected>
+                                                                                                <?= $role['role_name'] ?>
+                                                                                            </option>
+                                                                                        <?php else: ?>
+                                                                                            <option value="<?= $role['id'] ?>">
+                                                                                                <?= $role['role_name'] ?>
+                                                                                            </option>
+                                                                                        <?php endif; ?>
+                                                                                    <?php endforeach; ?>
                                                                                  </select>
                                                                         </div><br>
+
+
                                                                                                    
                                                                         <label style="font-weight:bold">Kullanıcı Yetkileri</label>
                                                                         <div class="form-group" style="display:flex; ">
                                                                         <?php
-                                                                        foreach($data['permissions'] as $permission): ?>
-                                                                         <div class="checkbox">
-                                                                             <label>
-                                                                                 <input type="checkbox" name="permission[]" value="<?=$permission['id']?>">
-                                                                                 <?=$permission['name']?>
-                                                                             </label>
-                                                                         </div>
-                                                                       <?php endforeach;
-                                                                        ?>
-                                                                     
-                                                                    
+                                                                      foreach ($data['permissions'] as $permission): ?>
+                                                                        <div class="checkbox">
+                                                                            <label>
+                                                                                <?php 
+                                                                                    $checked = in_array($permission['id'], $data['permission_id']) ? 'checked' : ''; 
 
-                    
+                                                                                ?>
+                                                                                <input type="checkbox" name="permission[]" value="<?= $permission['id'] ?>" <?= $checked ?>>
+                                                                                <?= $permission['name'] ?>
+                                                                            </label>
                                                                         </div>
+                                                                    <?php endforeach; ?>
+                                                                        
+                                                                    </div>
                                                                  
 
                                                                         <div class="form-group">
-                                                                                 <label style="font-weight:bold"        >Kullanıcı Dil Seçimi</label>
-                                                                                 <select class="form-select"
-                                                                                          name="languages"
-                                                                                          aria-label="Disabled select example">
-                                                                                          <?php
-                                                                                          foreach ($data['languages'] as $lang): ?>
-                                                                                                   <option
-                                                                                                            value="<?= $lang['id'] ?>">
-                                                                                                            <?= $lang['name'] ?>
-                                                                                                   </option>
-                                                                                          <?php endforeach; ?>
+                                                                                 <label style="font-weight:bold">Kullanıcı Dil Seçimi</label>
+                                                                                 <select class="form-select" name="languages" aria-label="Disabled select example">
+                                                                                 <?php foreach ($data['languages'] as $language): ?>
+                                                                                     <?php if ($language['id'] == $data['language_id']): ?>
+                                                                                         <option value="<?= $language['id'] ?>" selected>
+                                                                                             <?= $language['name'] ?>
+                                                                                         </option>
+                                                                                     <?php else: ?>
+                                                                                         <option value="<?= $language['id'] ?>">
+                                                                                             <?= $language['name'] ?>
+                                                                                         </option>
+                                                                                     <?php endif; ?>
+                                                                                 <?php endforeach; ?>
                                                                                  </select>
                                                                         </div><br>
 

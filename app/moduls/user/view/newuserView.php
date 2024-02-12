@@ -181,39 +181,43 @@
 
                                                       <div class="card-body">
 
-                                                               <form action="/proje/registerPost" method="POST">
+                                                               <form action="/proje/newuserPost" method="POST" onsubmit="return validateForm()">
                                                                         <div class="form-group">
                                                                                  <label style="font-weight:bold">Kullanıcı Adı</label>
                                                                                  <input type="text" name="fname"
-                                                                                          class="form-control">
+                                                                                          class="form-control" required>
                                                                         </div><br>
                                                                         <div class="form-group">
                                                                                  <label style="font-weight:bold">Kullanıcı Soyadı</label>
                                                                                  <input type="text" name="lname"
-                                                                                          class="form-control">
+                                                                                          class="form-control" required>
                                                                         </div><br>
                                                                         <div class="form-group">
                                                                                  <label style="font-weight:bold">Kullanıcı E-mail</label>
                                                                                  <input type="email" name="email"
-                                                                                          class="form-control">
+                                                                                          class="form-control" required>
                                                                         </div><br>
 
                                                                         <div class="form-group">
                                                                                  <label style="font-weight:bold">Kullanıcı Şifre</label>
                                                                                  <input type="password" name="password"
-                                                                                          class="form-control">
+                                                                                          class="form-control" required>
                                                                         </div><br>
 
                                                                         <div class="form-group">
                                                                                  <label style="font-weight:bold">Kullanıcı Şifre Tekrar</label>
                                                                                  <input type="password" name="rpassword"
-                                                                                          class="form-control">
+                                                                                          class="form-control" required>
                                                                         </div><br>
+                                                                        <div class="alert alert-warning" role="alert">
+                                                                        <p>Şifre en az 6 en fazla 10 karakterden oluşmalıdır.</p><br>
+                                                                        <p>Şifre büyük harf , küçük harf ve rakam içermelidir.</p>
+                                                                        </div>  
                                                                         <div class="form-group">
                                                                                  <label style="font-weight:bold">Kullanıcı Rol Seçimi</label>
                                                                                  <select class="form-select"
                                                                                           name="roles"
-                                                                                          aria-label="Disabled select example">
+                                                                                          aria-label="Disabled select example" required>
                                                                                           <?php
                                                                                           foreach ($data['roles'] as $role): ?>
                                                                                                    <option
@@ -230,7 +234,7 @@
                                                                         foreach($data['permissions'] as $permission): ?>
                                                                          <div class="checkbox">
                                                                              <label>
-                                                                                 <input type="checkbox" name="permission[]" value="<?=$permission['id']?>">
+                                                                                 <input type="checkbox" name="permission[]" value="<?=$permission['id']?>" >
                                                                                  <?=$permission['name']?>
                                                                              </label>
                                                                          </div>
@@ -247,7 +251,7 @@
                                                                                  <label style="font-weight:bold"        >Kullanıcı Dil Seçimi</label>
                                                                                  <select class="form-select"
                                                                                           name="languages"
-                                                                                          aria-label="Disabled select example">
+                                                                                          aria-label="Disabled select example" required>
                                                                                           <?php
                                                                                           foreach ($data['languages'] as $lang): ?>
                                                                                                    <option
@@ -273,5 +277,22 @@
          </div>
 
 </body>
-
+<script>
+    function validateForm() {
+        var checkboxes = document.getElementsByName('permission[]');
+        var isChecked = false;
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                isChecked = true;
+                break;
+            }
+        }
+        if (!isChecked) {
+            alert("En az bir izin seçmelisiniz.");
+            return false;
+        }
+        return true;
+    }
+</script>
 </html>
+
