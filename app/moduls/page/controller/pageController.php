@@ -57,11 +57,16 @@ class pageController extends mainController
                   $language_id = $_POST['language_id'];
                   $status = $_POST['status'];
 
-                  
+
     
-                  $query = $this->db->prepare("INSERT INTO pages (name,slug,meta_title,meta_description,content,image,image2,language_id,status) VALUES ('','')");
+                  $query = $this->db->prepare("INSERT INTO pages (name,slug,meta_title,meta_description,content,image,image2,language_id,status) VALUES ()");
                   $query->execute();
          }
+
+
+
+
+
 
 
 }

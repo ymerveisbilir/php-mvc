@@ -8,9 +8,11 @@ App::getAction(link: '/proje/login', path: '/user/login', auth: false);
 
 App::postAction(link: '/proje/loginPost', path: '/user/loginPost', auth: false);
 
-App::getAction(link: '/proje/dashboard', path: '/admin/dashboard', auth: false);
+App::getAction(link: '/proje/dashboard', path: '/admin/dashboard', auth: true);
 
-App::getAction(link: '/proje/usersetting', path: '/admin/user', auth: false);
+
+//Users
+App::getAction(link: '/proje/usersetting', path: '/admin/user', auth: true);
 
 App::getAction(link: '/proje/userupdate/([0-9a]+)', path: '/admin/userupdate/([0-9a]+)', auth: false);
 
@@ -20,6 +22,7 @@ App::getAction(link: '/proje/delete/([0-9a]+)', path: '/admin/delete/([0-9a]+)',
 
 
 
+//Roles
 App::getAction(link: '/proje/newrole', path: '/admin/newrole', auth: false);
 
 App::postAction(link: '/proje/newrolePost', path: '/admin/newrolePost', auth: false);
@@ -55,6 +58,24 @@ App::getAction(link: '/proje/permissionupdate/([0-9a]+)', path: '/admin/permissi
 App::postAction(link: '/proje/permissionupdatePost/([0-9a]+)', path: '/admin/permissionupdatePost/([0-9a]+)', auth: false);
 
 App::getAction(link: '/proje/permission_delete/([0-9a]+)', path: '/admin/permission_delete/([0-9a]+)', auth: false);
+
+
+App::postAction(link: '/proje/logout', path: '/user/logout', auth: false);
+
+
+App::getAction(link: '/proje/pages', path: '/page/page', auth: true);
+App::getAction(link: '/proje/newpage', path: '/page/newpage', auth: true);
+
+App::postAction(link: '/proje/newpagePost', path: '/page/newpagePost', auth: true);
+
+
+//App::getAction(link: '/proje/pageupdate', path: '/page/pageupdate', auth: true); 
+
+//App::postAction(link: '/proje/pageupdatePost/([0-9a]+)', path: '/page/pageupdatePost/([0-9a]+)', auth: true);
+
+
+
+
 
 
 ?>

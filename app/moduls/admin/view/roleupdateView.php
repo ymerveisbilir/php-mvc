@@ -188,7 +188,7 @@
                                                                                  <input type="text" name="rdescription"
                                                                                           class="form-control" value="<?=$data['role_description']?>">
                                                                         </div><br>
-                                                                        <button type="submit" class="btn btn-success">Ekle</button>
+                                                                        <button type="submit" class="btn btn-primary">Güncelle</button>
                                                                </form>
 
 

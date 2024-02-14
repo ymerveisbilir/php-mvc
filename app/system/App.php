@@ -67,9 +67,17 @@ class App
 
                                     //print_r($this->$home);
                                    }else{
-                                    $modul = $activeModul;
-                                    $controller = $activeModul."Controller";
-                                    $method = $activeMethod;
+
+                                    if($auth==false || ($auth==true && $_SESSION['user_id'] != '')){
+                                          $modul = $activeModul;
+                                          $controller = $activeModul."Controller";
+                                          $method = $activeMethod;
+                                    }else{
+                                          //login sayfasına yönlendirilecek.
+                                         echo "yetki yok";
+                                          header("Location: http://localhost/proje/login");
+                                    }
+                         
 
                                     //print_r($method);
                                    }
