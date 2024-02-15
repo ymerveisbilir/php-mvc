@@ -8,26 +8,26 @@
 
                                     <div class="card-body">
 
-                                             <form action="/proje/newpagePost" method="POST">
+                                             <form action="/proje/newpagePost" method="POST" enctype="multipart/form-data">
                                                       <div class="form-group">
                                                                <label style="font-weight:bold">Sayfa Adı </label>
-                                                               <input type="text" name="name" class="form-control">
+                                                               <input type="text" name="name" class="form-control" required>
                                                       </div><br>
 
                                                       <div class="form-group">
                                                                <label style="font-weight:bold">Sayfa URL</label>
-                                                               <input type="text" name="slug" class="form-control">
+                                                               <input type="text" name="slug" class="form-control" required>
                                                       </div><br>
 
                                                       <div class="form-group">
                                                                <label style="font-weight:bold">Meta Title</label>
-                                                               <input type="text" name="title" class="form-control">
+                                                               <input type="text" name="title" class="form-control" required>
                                                       </div><br>
 
                                                       <div class="form-group">
                                                                <label style="font-weight:bold">Meta Description</label>
                                                                <input type="text" name="description"
-                                                                        class="form-control">
+                                                                        class="form-control" required>
                                                       </div><br>
 
                                                       <div class="form-group">

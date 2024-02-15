@@ -21,6 +21,10 @@ class adminModel extends mainModel{
                   $stmt = $this->db->query("SELECT * FROM permissions");
                   return $stmt;
          }
+         public function pages(){
+              $stmt = $this->db->query("SELECT * FROM pages");
+              return $stmt;
+     }
 }
 
 ?>

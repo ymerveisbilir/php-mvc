@@ -161,6 +161,7 @@
          <div class="sidebar d-none d-md-block">
                   <a href="dashboard">Dashboard</a>
                   <a class="active" href="usersetting">Kullanıcı Ayarları</a>
+                  <a  href="/proje/pageList">Sayfalar</a>
          </div>
 
          <!-- Ana içerik -->

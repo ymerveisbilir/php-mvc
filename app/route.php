@@ -63,15 +63,22 @@ App::getAction(link: '/proje/permission_delete/([0-9a]+)', path: '/admin/permiss
 App::postAction(link: '/proje/logout', path: '/user/logout', auth: false);
 
 
-App::getAction(link: '/proje/pages', path: '/page/page', auth: true);
-App::getAction(link: '/proje/newpage', path: '/page/newpage', auth: true);
+//Pages
+App::getAction(link: '/proje/pageList', path: '/admin/pageList', auth: true);
+App::getAction(link: '/proje/newpage', path: '/admin/newpage', auth: true);
+App::postAction(link: '/proje/newpagePost', path: '/admin/newpagePost', auth: true);
 
-App::postAction(link: '/proje/newpagePost', path: '/page/newpagePost', auth: true);
+App::getAction(link: '/proje/pageupdate/([0-9a]+)', path: '/admin/pageupdate/([0-9a]+)', auth: true); 
+App::postAction(link: '/proje/pageupdatePost/([0-9a]+)', path: '/admin/pageupdatePost/([0-9a]+)', auth: true);
+
+App::getAction(link: '/proje/page_delete/([0-9a]+)', path: '/admin/page_delete/([0-9a]+)', auth: true); 
 
 
-//App::getAction(link: '/proje/pageupdate', path: '/page/pageupdate', auth: true); 
+//Önyüz sayfa
+App::getAction(link: '/proje/page/([0-9a-zA-Z-_]+)', path: '/page/detail', auth: false);
 
-//App::postAction(link: '/proje/pageupdatePost/([0-9a]+)', path: '/page/pageupdatePost/([0-9a]+)', auth: true);
+
+
 
 
 

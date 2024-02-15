@@ -2,69 +2,59 @@
 
 class pageController extends mainController
 {
-
+         public $db;
          public function __construct()
          {
                   $mainModel = new mainModel();
                   $this->db = $mainModel->db;
 
-                  //header'a gönderilmesi gereken datalar.
-                  session_start();
+         }
 
-                  $query = $this->db->query("SELECT * FROM role_users WHERE user_id='$_SESSION[user_id]'");
+
+
+         public function detail(){
+                  $slug = explode("proje/page/",$_SERVER['REQUEST_URI']);
+
+                  //print_r($slug);
+                  //echo $slug[1];
+
+                  //Kontrol böyle bir slug veritabanında var mı ?? 
+                  $query = $this->db->query("SELECT COUNT(id) as page FROM pages WHERE slug = '$slug[1]' and status = '0'");
                   $query->execute();
-                  $user = $query->fetch(PDO::FETCH_ASSOC);
-
-                  $query2 = $this->db->query("SELECT * FROM roles WHERE id='$user[role_id]'");
-                  $query2->execute();
-                  $roles = $query2->fetch(PDO::FETCH_ASSOC);
+                  $isPage = $query->fetch(PDO::FETCH_ASSOC);
 
 
+               
+                  if($isPage['page'] > 0 ){
 
-                  $data['role_name'] = $roles['role_name'];
+                           $query2 = $this->db->query("SELECT * FROM pages WHERE slug = '$slug[1]'");
+                           $query2->execute();
+                           $page = $query2->fetch(PDO::FETCH_ASSOC);
+                           //print_r($page);   => sayfa verileri.
 
 
-                  $this->callView("admin", "header", $data);
+                           $data['name'] = $page['name'];
+                           $data['content'] = $page['content'];
+                           $data['date'] = date("d.m.Y", strtotime($page['created_at']));
+                           $data['image'] = $page['image'];
+         
+         
+                           //Tüm Sayfaların listesi 
+                           $pageModel = new pageModel();
+                           $data['pages'] = $pageModel->pages();
+         
+                           $this->callView("page","detail",$data);
+                  }
+                  else{
+                           $slug = explode("proje/page/",$_SERVER['REQUEST_URI']);
+
+                           $data['slug'] = $slug;
+
+                           $this->callView("page","404",$data);
+                  }
+
 
          }
-
-         public function page(){
-                  $data = [];
-                  $this->callView("page","page",$data);
-                  $this->callView("admin","footer",$data);
-         }
-
-
-         public function newpage(){
-
-                  $pageModel = new pageModel();
-                  $data['languages'] =$pageModel->languages();
-                  $this->callView("page","newpage",$data);
-                  $this->callView("admin","footer",$data);
-         }
-
-         public function newpagePost(){
-                  
-                  //Posttan gelen verileri pages tablosuna kaydedilmelidir.
-
-                  $name = $_POST['name'];
-                  $slug = $_POST['slug'];
-                  $title = $_POST['title'];
-                  $description = $_POST['description'];
-                  $content = $_POST['content'];
-                  $image = $_POST['image'];
-                  $image2 = $_POST['image2'];
-                  $language_id = $_POST['language_id'];
-                  $status = $_POST['status'];
-
-
-    
-                  $query = $this->db->prepare("INSERT INTO pages (name,slug,meta_title,meta_description,content,image,image2,language_id,status) VALUES ()");
-                  $query->execute();
-         }
-
-
-
 
 
 

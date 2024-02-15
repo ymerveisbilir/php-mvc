@@ -105,7 +105,7 @@ session_start();
             display: none;
             /* Başlangıçta gizli */
             position: fixed;
-            top: 25%;
+            top: 13%;
             left: 95%;
             transform: translate(-50%, -50%);
             background-color: #f1f1f1;
@@ -132,8 +132,8 @@ session_start();
         }
         .info-box-content{
             position: fixed;
-            top: 17%;
-            left: 21%;
+            top: 10%;
+            left: 18%;
         }
     </style>
 </head>
@@ -210,9 +210,9 @@ session_start();
 
     <!-- Kenar çubuğu -->
     <div class="sidebar d-none d-md-block">
-        <a href="dashboard" onclick="setActive(this)">Dashboard</a>
-        <a href="usersetting" onclick="setActive(this)">Kullanıcı Ayarları</a>
-        <a href="pages" onclick="setActive(this)">Sayfalar</a>
+        <a href="/proje/dashboard" onclick="setActive(this)">Dashboard</a>
+        <a href="/proje/usersetting" onclick="setActive(this)">Kullanıcı Ayarları</a>
+        <a href="/proje/pageList" onclick="setActive(this)">Sayfalar</a>
     </div>
 
     <!-- Ana içerik -->
