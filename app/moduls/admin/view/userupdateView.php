@@ -100,7 +100,7 @@
 
 
                                                                         <button type="submit"
-                                                                                 class="btn btn-success mt-1">Ekle</button>
+                                                                                 class="btn btn-primary mt-1">Güncelle</button>
                                                                </form>
 
 

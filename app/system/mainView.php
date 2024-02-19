@@ -1,6 +1,8 @@
 <?php
 
 class View{
+    //dashboard 
+    
 
          public static function frontView($modul, $method, $data = null)
          {
@@ -11,6 +13,8 @@ class View{
              }
      
          }
+
+         
      
      
          public static function frontLayout($layout,$modul,$method,$data=null)

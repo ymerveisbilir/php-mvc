@@ -16,36 +16,28 @@ class adminController extends mainController
               $query->execute();
               $user = $query->fetch(PDO::FETCH_ASSOC);
 
+              $user['permission_id'] = str_replace("\"","",$user['permission_id']);
+              $user['permission_id'] = explode(",", $user['permission_id']);
+              $data['permission_id'] = array_map('intval', $user['permission_id']); 
+
+
               $query2 = $this->db->query("SELECT * FROM roles WHERE id='$user[role_id]'");
               $query2->execute();
               $roles = $query2->fetch(PDO::FETCH_ASSOC);
 
 
-
               $data['role_name'] = $roles['role_name'];
-
-
+              $data['role_id'] = $roles['id'];
+            
               $this->callView("admin", "header", $data);
 
 
 
        }
-       public function dashboard()
-       {
-              $query3 = $this->db->query("SELECT COUNT(id) as userCount FROM users ");
-              $query3->execute();
-              $userCount = $query3->fetch(PDO::FETCH_ASSOC);
-
-              $data['userCount'] = $userCount['userCount'];
-              $this->callView("admin", "dashboard", $data);
-
-              //burada çağrılması gereken view dashboard
-       }
 
 
        public function user()
        {
-
               $adminModel = new adminModel();
               $data['user'] = $adminModel->user();
               $data['roles'] = $adminModel->roles();
@@ -125,17 +117,30 @@ class adminController extends mainController
 
        }
 
-       public function delete()
+       public function delete($user_id)
        {
-              $userID = explode("proje/delete/", $_SERVER['REQUEST_URI']);
 
-              $query = $this->db->query("DELETE FROM users WHERE id = '$userID[1]' ");
-              $query->execute();
+              //$userID = explode("proje/delete/", $_SERVER['REQUEST_URI']);
 
-              $query2 = $this->db->query("DELETE FROM role_users WHERE user_id = '$userID[1]' ");
-              $query2->execute();
+              //buradaki işlemleri model'de yaptır.
+
+            // echo "geldi mi";
+
+              $usersettingModel = new usersettingModel();
+              
+              $usersettingModel->user_delete($user_id);
 
               echo "Kullanıcı silindi";
+
+
+              /*
+              $query = $this->db->query("DELETE FROM users WHERE id = '$user_id' ");
+              $query->execute();
+
+              $query2 = $this->db->query("DELETE FROM role_users WHERE user_id = '$user_id' ");
+              $query2->execute();
+
+              */
 
 
        }
@@ -322,6 +327,9 @@ class adminController extends mainController
        }
 
 
+
+
+
        public function pageList()
        {
               $adminModel = new adminModel();
@@ -430,6 +438,8 @@ class adminController extends mainController
               $this->callView("admin", "pageupdate", $data);
 
        }
+
+       
 
        public function pageupdatePost()
        {

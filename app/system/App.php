@@ -5,7 +5,6 @@ class App
          protected $nowPath;
          protected $nowMethod;
          protected static $routes = [];
-         protected $home;
 
 
          public function __construct()
@@ -13,8 +12,7 @@ class App
                   $this->nowPath = $_SERVER['REQUEST_URI'];
                   $this->nowMethod = $_SERVER['REQUEST_METHOD'];
 
-                  global $config;        // print_r($config);
-                  $this->home = $config['home'];
+
   
                   $this->startRoute();
 
@@ -29,6 +27,9 @@ class App
          {
                   self::$routes[] = ['POST', $link, $path, $auth];
          }
+
+
+
 
          public function startRoute()
          {
@@ -46,41 +47,39 @@ class App
 
                            $methodCheck = $this->nowMethod == $method;
 
+
+                         
+
                            $pathCheck = preg_match(pattern: "@^$link$@", subject: $this->nowPath, flags: PREG_UNMATCHED_AS_NULL, matches: $params);
 
-                           //print_r($params); gelen link ile route'daki link eşleşiyorsa 0 değerini yazdırır.
+                           //print_r($params); gelen link ile route'daki link eşleşiyorsa true(0) değerini yazdırır.
                      
 
                            $modul="";
                            $controller="";
                            $method="";
                            if($methodCheck && $pathCheck){
+
                                     $url = explode("/",$path);
                                     array_shift($url);
-                                    list($activeModul,$activeMethod) = $url;
+                                    //print_r($url);  //[1] => modül adı , [2] => controller adı , [3] => fonk. adı
+                                    //die();
+                                    list($activeModul,$activeController,$activeMethod) = $url;
                                    // echo $modul."<br>".$method."<br><br>";
-
-                                   if($this->nowPath == "/proje/"){//anasayfa ise 
-                                    $modul = $this->home['modul'];
-                                    $controller = $this->home['modul']."Controller";
-                                    $method = $this->home['method'];
-
-                                    //print_r($this->$home);
-                                   }else{
 
                                     if($auth==false || ($auth==true && $_SESSION['user_id'] != '')){
                                           $modul = $activeModul;
-                                          $controller = $activeModul."Controller";
+                                          $controller = $activeController."Controller";
                                           $method = $activeMethod;
                                     }else{
                                           //login sayfasına yönlendirilecek.
-                                         echo "yetki yok";
+                                          //echo "yetki yok";
                                           header("Location: http://localhost/proje/login");
                                     }
                          
 
                                     //print_r($method);
-                                   }
+                                   
                            }
 
                            if($modul != "" and $controller!=''){
@@ -91,8 +90,14 @@ class App
                                     if(class_exists($controller)){
                                           $class=new $controller();
                                           if(method_exists($class,$method)){ //Class içerisinde tanımlı method var mı ?
-                                                //print_r($params); url'den gelen parametreleri burada görebilirsin.
-                                              return call_user_func([$class,$method]);
+                                                //print_r($params); //url'den gelen parametreleri burada görebilirsin.
+
+                                                if (isset($params[1])) {//fonksiyona gönderilecek bir parametre var mı ? $user_id gibi 
+                                                      return call_user_func([$class, $method], $params[1]);
+                                                  } else {
+                                                      return call_user_func([$class, $method]);      
+                                                }
+                                                
                                           }else{
                                                 echo "Method Not Found.";
                                           }

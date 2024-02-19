@@ -1,6 +1,6 @@
-<a href="newpage"><button class="btn btn-warning btn-sm">+Yeni Sayfa Ekle</button></a><br>
-
-
+<div style="text-align: right;padding: 3px 5px;font-size: 9px;">
+<a href="newpage"><button class="btn btn-warning ">+Yeni Sayfa Ekle</button></a>
+</div><br>
 
 <table class="table">
   <thead class="thead-dark">

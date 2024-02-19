@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -130,7 +131,8 @@ session_start();
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-        .info-box-content{
+
+        .info-box-content {
             position: fixed;
             top: 10%;
             left: 18%;
@@ -210,11 +212,17 @@ session_start();
 
     <!-- Kenar çubuğu -->
     <div class="sidebar d-none d-md-block">
-        <a href="/proje/dashboard" onclick="setActive(this)">Dashboard</a>
-        <a href="/proje/usersetting" onclick="setActive(this)">Kullanıcı Ayarları</a>
+        
+        <!-- Kullanıcının kullanıcı ayarları izni var ise bu seçeneği görebilir -->
+        <?php
+        if (in_array("3", $data['permission_id'])) {?>
+                <a href="/proje/usersetting" onclick="setActive(this)">Kullanıcı Ayarları</a>
+                <a href="/proje/dashboard" onclick="setActive(this)">Dashboard</a>
+
+        <?php } ?>
+
         <a href="/proje/pageList" onclick="setActive(this)">Sayfalar</a>
     </div>
 
     <!-- Ana içerik -->
     <div class="main-content">
-        

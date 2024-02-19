@@ -9,7 +9,7 @@
 
             </div>
             <div class="info-box-content">
-                <span class="info-box-text">Yönetici Sayısı</span><br>
+                <span class="info-box-text">Kullanıcı Sayısı</span><br>
                 <span class="info-box-number"><?=$data['userCount']?></span>
             </div>
         </div>
