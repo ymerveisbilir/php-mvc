@@ -1,4 +1,10 @@
+<?php
+session_start();
 
+
+    unset($_SESSION['message']);
+
+?>
               
                   <h4>Kullanıcı Ayarları</h4><br>
                   <br>

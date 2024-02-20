@@ -101,6 +101,7 @@ class userController extends mainController
         //$data = $_POST;
         //print_r($data);
 
+      
         $email = $_POST['email'];
         $password = $_POST['password'];
 

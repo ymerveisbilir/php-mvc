@@ -1,6 +1,6 @@
 <?php
 
-namespace app\model;
+
 
 class usersettingModel extends mainModel{
 

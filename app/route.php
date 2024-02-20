@@ -23,7 +23,7 @@ App::getAction(link: '/proje/userupdate/([0-9a]+)', path: '/admin/admin/userupda
 
 App::postAction(link: '/proje/userupdatePost/([0-9a]+)', path: '/admin/admin/userupdatePost/([0-9a]+)', auth: false);
 
-App::getAction(link: '/proje/delete/([0-9a]+)', path: '/admin/admin/delete/([0-9a]+)', auth: false);
+App::getAction(link: '/proje/delete/([0-9a]+)', path: '/admin/admin/user_delete/([0-9a]+)', auth: false);
 
 
 
@@ -69,14 +69,14 @@ App::postAction(link: '/proje/logout', path: '/user/user/logout', auth: false);
 
 
 //Pages
-App::getAction(link: '/proje/pageList', path: '/admin/admin/pageList', auth: true);
-App::getAction(link: '/proje/newpage', path: '/admin/admin/newpage', auth: true);
-App::postAction(link: '/proje/newpagePost', path: '/admin/admin/newpagePost', auth: true);
+App::getAction(link: '/proje/pageList', path: '/admin/page/pageList', auth: true);
+App::getAction(link: '/proje/newpage', path: '/admin/page/newpage', auth: true);
+App::postAction(link: '/proje/newpagePost', path: '/admin/page/newpagePost', auth: true);
 
-App::getAction(link: '/proje/pageupdate/([0-9a]+)', path: '/admin/admin/pageupdate/([0-9a]+)', auth: true); 
-App::postAction(link: '/proje/pageupdatePost/([0-9a]+)', path: '/admin/admin/pageupdatePost/([0-9a]+)', auth: true);
+App::getAction(link: '/proje/pageupdate/([0-9a]+)', path: '/admin/page/pageupdate/([0-9a]+)', auth: true); 
+App::postAction(link: '/proje/pageupdatePost/([0-9a]+)', path: '/admin/page/pageupdatePost/([0-9a]+)', auth: true);
 
-App::getAction(link: '/proje/page_delete/([0-9a]+)', path: '/admin/admin/page_delete/([0-9a]+)', auth: true); 
+App::getAction(link: '/proje/page_delete/([0-9a]+)', path: '/admin/page/page_delete/([0-9a]+)', auth: true); 
 
 
 //Önyüz sayfa

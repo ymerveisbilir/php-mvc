@@ -15,9 +15,9 @@ require_once "route.php";
 require_once "layout/mainLayout.php"; //bootstrap
 
 
-require_once "../vendor/autoload.php";
+//require_once "../vendor/autoload.php";
 
-/*
+
 //Model dosyalarının controller'a dahil edilmesi.
 spl_autoload_register(function($class_name){
 
@@ -29,6 +29,6 @@ spl_autoload_register(function($class_name){
         require_once $include;
     }
 });
-*/
+
 
 ?>
