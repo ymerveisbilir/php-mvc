@@ -1,5 +1,7 @@
 <?php
+namespace App\system;
 
+use PDO;
 class Database {
 
          private $conn;

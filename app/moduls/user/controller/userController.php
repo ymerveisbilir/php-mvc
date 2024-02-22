@@ -1,20 +1,36 @@
 <?php
 
+use App\moduls\user\model\userModel;
+
+use App\system\mainController;
+
+use App\system\mainModel;
+
+use App\Entity\User;
+
+use Symfony\Component\HttpFoundation\Request;
+
+use Symfony\Component\HttpFoundation\Response;
+
 
 class userController extends mainController
 {
     public $db;
 
-
     public function __construct()
     {
         $mainModel = new mainModel();
         $this->db = $mainModel->db;
+
+        $request = Request::createFromGlobals();
+
     }
+
+    
 
     public function newuser()
     {
-
+    
 
         $userModel = new userModel();
         $data['roles'] = $userModel->roles();
@@ -22,11 +38,23 @@ class userController extends mainController
         $data['permissions'] = $userModel->permissions();
         $this->callView("user", "newuser", $data);
 
-
     }
 
-    public function newuserPost()
+    public function newuserPost(Request $request)
     {
+    
+        $fname = $request->request->get('fname');
+        $lname = $request->request->get('lname');
+        $email = $request->request->get('email');
+        $password = $request->request->get('password');
+        $rpassword = $request->request->get('rpassword');
+        $roles = $request->request->get('roles');
+        $permission = $request->request->get('permission');
+        $language = $request->request->get('languages');
+  
+        echo $fname;
+        die();
+
         //$data = $_POST;
         //print_r($data);
 
@@ -101,7 +129,7 @@ class userController extends mainController
         //$data = $_POST;
         //print_r($data);
 
-      
+
         $email = $_POST['email'];
         $password = $_POST['password'];
 
@@ -118,16 +146,26 @@ class userController extends mainController
             $_SESSION['lname'] = $user['last_name'];
             $_SESSION['email'] = $user['email'];
 
-
-            /*
-                                       echo $_SESSION['user_id']."<br>";
-                                       echo $_SESSION['fname']."<br>";
-                                       echo $_SESSION['lname']."<br>";
-                                       echo $_SESSION['email']."<br>";
-                                       die();
-            */
-
             header("Location: http://localhost/proje/dashboard");
+        } else {
+
+
+            $query = $this->db->prepare("SELECT COUNT(id) as quantity,first_name,id,last_name,email FROM users WHERE email = '$email'");
+            $query->execute();
+            $user = $query->fetch(PDO::FETCH_ASSOC);
+
+            session_start();
+
+            if ($user['quantity'] > 0) { //Email adresi var şifre mi yanlış ? 
+                $_SESSION['message'] = 'Şifre hatalı.';
+            } else {//Email adresi mi yok 
+                $_SESSION['message'] = 'Girmiş olduğunuz email adresi ile kullanıcı bulunmamaktadır.';
+            }
+
+
+
+            echo '<script>alert("' . $_SESSION['message'] . '"); window.location = "/proje/login";</script>';
+
         }
 
 

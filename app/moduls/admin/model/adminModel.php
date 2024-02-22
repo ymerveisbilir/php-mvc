@@ -63,6 +63,14 @@ class adminModel extends mainModel
           return $roles;
      }
 
+     public function roleupdatePost($role_id){
+          $sql = "UPDATE roles SET role_name = :role_name, role_description = :role_description WHERE id = :role_id";
+          $stmt = $this->db->prepare($sql);
+          $stmt->bindParam(':role_name', $_POST['rname']);
+          $stmt->bindParam(':role_description', $_POST['rdescription']);
+          $stmt->bindParam(':role_id', $role_id);
+          $stmt->execute();
+     }
      public function role_delete($role_id)
      {
           $query = $this->db->prepare("DELETE FROM roles WHERE id = :role_id");

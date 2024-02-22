@@ -166,20 +166,32 @@ class adminController extends mainController
               $this->callView("admin", "roleupdate", $data);
        }
 
-       public function roleupdatePost()
+       public function roleupdatePost($role_id)
        {
-              $roleID = explode("proje/roleupdatePost/", $_SERVER['REQUEST_URI']);
-
+              /*
               $role_name = $_POST['rname'];
               $role_desc = $_POST['rdescription'];
 
 
-              $query = $this->db->query("UPDATE roles SET role_name='$role_name',role_description='$role_desc'  WHERE id = '$roleID[1]' ");
+              $query = $this->db->query("UPDATE roles SET role_name='$role_name',role_description='$role_desc'  WHERE id = '$role_id' ");
               $query->execute();
 
 
               echo "Mevcut rol bilgileri güncellendi";
-       }
+              */
+
+
+              $adminModel = new adminModel();
+
+              $adminModel->roleupdatePost($role_id);
+
+              session_start();
+
+              $_SESSION['message'] = 'Güncelleme işlemi tamamlandı.';
+
+              echo '<script>alert("'.$_SESSION['message'].'"); window.location = "/proje/usersetting";</script>';
+
+              exit();       }
 
        public function role_delete($role_id)
        {

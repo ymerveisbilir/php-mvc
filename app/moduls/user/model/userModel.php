@@ -1,4 +1,7 @@
 <?php
+namespace app\moduls\user\model;
+
+use App\system\mainModel;
 class userModel extends mainModel {
 
          public function users(){

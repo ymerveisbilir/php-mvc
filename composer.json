@@ -1,9 +1,11 @@
 {
-    "name": "cms/proje",
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
-        }
+            "App\\" : "app/"
+                }
     },
-    "require": {}
+    "require": {
+        "symfony/http-foundation": "^5.0",
+        "doctrine/orm": "^3.0"
+    }
 }

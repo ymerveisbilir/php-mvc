@@ -4,6 +4,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL^E_NOTICE);
 
 session_start();
+
+require_once "../vendor/autoload.php";
+
 require_once "config.php";
 require_once "system/App.php";
 require_once "system/Database.php";
@@ -15,9 +18,9 @@ require_once "route.php";
 require_once "layout/mainLayout.php"; //bootstrap
 
 
-//require_once "../vendor/autoload.php";
 
 
+/*
 //Model dosyalarının controller'a dahil edilmesi.
 spl_autoload_register(function($class_name){
 
@@ -30,5 +33,5 @@ spl_autoload_register(function($class_name){
     }
 });
 
-
+*/
 ?>

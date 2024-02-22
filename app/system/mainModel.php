@@ -1,4 +1,7 @@
 <?php
+namespace App\system;
+
+use App\system\Database;
 
 class mainModel extends Database{
          public $db;

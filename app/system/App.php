@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\HttpFoundation\Request;
+
 class App
 {
          protected $nowPath;
@@ -11,11 +13,11 @@ class App
          {
                   $this->nowPath = $_SERVER['REQUEST_URI'];
                   $this->nowMethod = $_SERVER['REQUEST_METHOD'];
-
-
   
+
                   $this->startRoute();
 
+                  
          }
 
          public static function getAction($link, $path, $auth = false)
@@ -33,6 +35,8 @@ class App
 
          public function startRoute()
          {
+            $request = Request::createFromGlobals();
+
 
                   //echo "func. tetiklendi<br>";
                   foreach (self::$routes as $routes) {
@@ -86,7 +90,7 @@ class App
                               if(file_exists($file="../app/moduls/".$modul."/controller/".$controller.".php")){
                                     require_once $file;
 
-                               
+                            
                                     if(class_exists($controller)){
                                           $class=new $controller();
                                           if(method_exists($class,$method)){ //Class içerisinde tanımlı method var mı ?
@@ -95,7 +99,7 @@ class App
                                                 if (isset($params[1])) {//fonksiyona gönderilecek bir parametre var mı ? $user_id gibi 
                                                       return call_user_func([$class, $method], $params[1]);
                                                   } else {
-                                                      return call_user_func([$class, $method]);      
+                                                      return call_user_func([$class, $method],$request);      
                                                 }
                                                 
                                           }else{

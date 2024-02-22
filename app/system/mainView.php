@@ -1,5 +1,7 @@
 <?php
 
+namespace App\system;
+
 class View{
     //dashboard 
     
